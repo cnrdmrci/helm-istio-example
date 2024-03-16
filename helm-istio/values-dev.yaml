@@ -1,0 +1,6 @@
+namespace: helm-istio-dev
+
+port: 80
+
+env:
+  NAMESPACE_MESSAGE: 'DEV namespace!'

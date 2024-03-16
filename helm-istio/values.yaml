@@ -1,0 +1,6 @@
+appName: helm-istio-app
+
+port: 80
+
+configmap:
+  name: helm-istio-app-configmap

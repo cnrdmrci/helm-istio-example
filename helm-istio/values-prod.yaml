@@ -1,0 +1,6 @@
+namespace: helm-istio-prod
+
+port: 80
+
+env:
+  NAMESPACE_MESSAGE: 'PROD namespace!'

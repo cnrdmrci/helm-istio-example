@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: httpd
+    version: v1
+  name: httpd-v1
+  namespace: {{ .Values.namespace }}
+spec:
+  containers:
+  - image: httpd
+    name: httpd
+    resources: {}
+    volumeMounts:
+    - mountPath: /usr/local/apache2/htdocs
+      name: index-html
+  dnsPolicy: ClusterFirst
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - "mkdir /usr/local/apache2/htdocs;( echo '<html> <body> <h1>This is version V1! - '$NAMESPACE_MESSAGE'</h1></body></html>') 
+    > /usr/local/apache2/htdocs/index.html"
+    image: busybox
+    name: busybox
+    env:
+      - name: NAMESPACE_MESSAGE
+        value: {{ .Values.env.NAMESPACE_MESSAGE }}
+    volumeMounts:
+    - mountPath: /usr/local/apache2/htdocs
+      name: index-html
+  restartPolicy: Always
+  volumes:
+  - emptyDir: {}
+    name: index-html

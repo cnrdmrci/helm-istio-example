@@ -1,0 +1,14 @@
+releases:
+  - name: helm-istio-dev-chart
+    chart: ./helm-istio
+    installed: true
+    values:
+      - "./helm-istio/values.yaml"
+      - "./helm-istio/values-dev.yaml"
+
+  - name: helm-istio-prod-chart
+    chart: ./helm-istio
+    installed: true
+    values:
+      - "./helm-istio/values.yaml"
+      - "./helm-istio/values-prod.yaml"

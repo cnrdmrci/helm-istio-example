@@ -1,0 +1,29 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: web-service
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts:      
+    - "*"
+  gateways:
+    - web-gateway
+  http:
+    - match:
+      - uri:  
+          prefix: "/v2"
+      rewrite:
+          uri: /
+      route: 
+      - destination:
+          host: web-service
+          subset: v2
+    - match:
+      - uri :
+          prefix: "/v1"
+      rewrite:
+          uri: /
+      route:
+      - destination:
+          host: web-service
+          subset: v1
